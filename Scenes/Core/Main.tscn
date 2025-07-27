@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs48dyw3fvxcm"]
+
+[ext_resource type="PackedScene" uid="uid://dj2t3qeu8vp8i" path="res://Scenes/Characters/Roger.tscn" id="1_af3mk"]
+[ext_resource type="Script" uid="uid://cqdvwxuqhb41a" path="res://Scripts/Characters/Player.gd" id="2_v6gkx"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Roger" parent="." instance=ExtResource("1_af3mk")]
+
+[node name="Node" type="Node" parent="Roger"]
+script = ExtResource("2_v6gkx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
