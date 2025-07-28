@@ -1,14 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs48dyw3fvxcm"]
+[gd_scene load_steps=6 format=3 uid="uid://cs48dyw3fvxcm"]
 
 [ext_resource type="PackedScene" uid="uid://dj2t3qeu8vp8i" path="res://Scenes/Characters/Roger.tscn" id="1_af3mk"]
 [ext_resource type="Script" uid="uid://cqdvwxuqhb41a" path="res://Scripts/Characters/Player.gd" id="2_v6gkx"]
+[ext_resource type="Script" uid="uid://elwqy7yocyub" path="res://Scripts/Core/Camera.gd" id="3_ah4vs"]
+[ext_resource type="PackedScene" uid="uid://d3vp5mq3sy7hu" path="res://Scenes/Environment/BackGround.tscn" id="4_t7cte"]
+[ext_resource type="PackedScene" uid="uid://cvy6fvm0rka1j" path="res://Scenes/Levels/Level-I.tscn" id="5_gralk"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Roger" parent="." instance=ExtResource("1_af3mk")]
+position = Vector2(40, -15)
 
-[node name="Node" type="Node" parent="Roger"]
+[node name="Player" type="Node" parent="Roger"]
 script = ExtResource("2_v6gkx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("_subject")]
+position = Vector2(123, 16)
 zoom = Vector2(3, 3)
+script = ExtResource("3_ah4vs")
+_subject = NodePath("../Roger")
+_offset = Vector2(2, -1)
+_look_ahead_trans_type = 1
+_look_ahead_ease_type = 2
+_floor_height_trans_type = 1
+_floor_height_ease_type = 1
+_floor_height_duration = 0.5
+
+[node name="BackGround" parent="Camera2D" instance=ExtResource("4_t7cte")]
+position = Vector2(0, 8)
+
+[node name="Level" parent="." instance=ExtResource("5_gralk")]
+
+[connection signal="changed_direction" from="Roger" to="Camera2D" method="_on_roger_changed_direction"]
+[connection signal="landed" from="Roger" to="Camera2D" method="_on_roger_landed"]
