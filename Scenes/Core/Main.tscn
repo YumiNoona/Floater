@@ -1,14 +1,110 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs48dyw3fvxcm"]
+[gd_scene load_steps=20 format=3 uid="uid://cs48dyw3fvxcm"]
 
 [ext_resource type="PackedScene" uid="uid://dj2t3qeu8vp8i" path="res://Scenes/Characters/Roger.tscn" id="1_af3mk"]
+[ext_resource type="Script" uid="uid://bsfvteyjd7d5q" path="res://Scripts/Core/GameManager.gd" id="1_ah4vs"]
 [ext_resource type="Script" uid="uid://cqdvwxuqhb41a" path="res://Scripts/Characters/Player.gd" id="2_v6gkx"]
+[ext_resource type="Script" uid="uid://elwqy7yocyub" path="res://Scripts/Core/Camera.gd" id="3_ah4vs"]
+[ext_resource type="PackedScene" uid="uid://d3vp5mq3sy7hu" path="res://Scenes/Environment/BackGround.tscn" id="4_t7cte"]
+[ext_resource type="PackedScene" uid="uid://cvy6fvm0rka1j" path="res://Scenes/Levels/Level-I.tscn" id="5_gralk"]
+[ext_resource type="Script" uid="uid://di3u14pkxns4d" path="res://Scripts/UI/CoinCountergd.gd" id="7_kmmkm"]
+[ext_resource type="Texture2D" uid="uid://c7gsgjalh7jub" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/36.png" id="7_t7cte"]
+[ext_resource type="Texture2D" uid="uid://ikh8yilc6x32" path="res://Treasure Hunters/Pirate Treasure/Gold Coin/01.png" id="7_xlfh5"]
+[ext_resource type="Texture2D" uid="uid://bcihcok8vy5j0" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/27.png" id="9_e8w2b"]
+[ext_resource type="Texture2D" uid="uid://bi4alswn4udyp" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/28.png" id="10_lijq2"]
+[ext_resource type="Texture2D" uid="uid://blquv6tfbuijm" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/29.png" id="11_n62cl"]
+[ext_resource type="Texture2D" uid="uid://dwom6q8rxrsxy" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/30.png" id="12_c1vld"]
+[ext_resource type="Texture2D" uid="uid://b2ry2wftrwmpi" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/31.png" id="13_6sinx"]
+[ext_resource type="Texture2D" uid="uid://b3t4sguv4rsfw" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/32.png" id="14_p1b62"]
+[ext_resource type="Texture2D" uid="uid://ccquc3d3hgra7" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/33.png" id="15_cn72a"]
+[ext_resource type="Texture2D" uid="uid://dyca63127xl6s" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/34.png" id="16_mjwtp"]
+[ext_resource type="Texture2D" uid="uid://t44sbcrc3ee2" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/35.png" id="17_ij3x7"]
+[ext_resource type="Texture2D" uid="uid://dvrjnxbilunpx" path="res://Treasure Hunters/Pirate Treasure/Golden Skull/01.png" id="19_lijq2"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ah4vs")
 
 [node name="Roger" parent="." instance=ExtResource("1_af3mk")]
+position = Vector2(-41, -16)
 
-[node name="Node" type="Node" parent="Roger"]
+[node name="Player" type="Node" parent="Roger"]
 script = ExtResource("2_v6gkx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("_subject")]
+position = Vector2(123, 16)
 zoom = Vector2(3, 3)
+script = ExtResource("3_ah4vs")
+_subject = NodePath("../Roger")
+_offset = Vector2(2, -1)
+_look_ahead_trans_type = 1
+_look_ahead_ease_type = 2
+_floor_height_trans_type = 1
+_floor_height_ease_type = 1
+_floor_height_duration = 0.5
+
+[node name="BackGround" parent="Camera2D" instance=ExtResource("4_t7cte")]
+position = Vector2(0, 8)
+
+[node name="Level" parent="." instance=ExtResource("5_gralk")]
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="CoinCounter" type="HBoxContainer" parent="GameUI"]
+offset_right = 68.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+script = ExtResource("7_kmmkm")
+_digits = Array[Texture2D]([ExtResource("7_t7cte"), ExtResource("9_e8w2b"), ExtResource("10_lijq2"), ExtResource("11_n62cl"), ExtResource("12_c1vld"), ExtResource("13_6sinx"), ExtResource("14_p1b62"), ExtResource("15_cn72a"), ExtResource("16_mjwtp"), ExtResource("17_ij3x7")])
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="GameUI/CoinCounter"]
+layout_mode = 2
+texture = ExtResource("7_xlfh5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Ones" type="TextureRect" parent="GameUI/CoinCounter"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("7_t7cte")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Tens" type="TextureRect" parent="GameUI/CoinCounter"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("7_t7cte")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="LivesCounter" type="HBoxContainer" parent="GameUI"]
+layout_direction = 3
+offset_left = 64.0
+offset_right = 132.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+script = ExtResource("7_kmmkm")
+_digits = Array[Texture2D]([ExtResource("7_t7cte"), ExtResource("9_e8w2b"), ExtResource("10_lijq2"), ExtResource("11_n62cl"), ExtResource("12_c1vld"), ExtResource("13_6sinx"), ExtResource("14_p1b62"), ExtResource("15_cn72a"), ExtResource("16_mjwtp"), ExtResource("17_ij3x7")])
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="GameUI/LivesCounter"]
+layout_mode = 2
+texture = ExtResource("19_lijq2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Ones" type="TextureRect" parent="GameUI/LivesCounter"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("7_t7cte")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Tens" type="TextureRect" parent="GameUI/LivesCounter"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("7_t7cte")
+expand_mode = 5
+stretch_mode = 5
+
+[connection signal="changed_direction" from="Roger" to="Camera2D" method="_on_roger_changed_direction"]
+[connection signal="landed" from="Roger" to="Camera2D" method="_on_roger_landed"]
