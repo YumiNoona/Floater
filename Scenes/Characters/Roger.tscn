@@ -305,6 +305,8 @@ height = 28.0
 
 [node name="Roger" type="CharacterBody2D"]
 position = Vector2(0, -12)
+collision_layer = 256
+collision_mask = 65537
 script = ExtResource("1_mseo1")
 _jump_dust = ExtResource("2_mf7a3")
 _is_facing_left = true

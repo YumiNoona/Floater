@@ -92,8 +92,8 @@ scale = Vector2(21.6, 4)
 texture = ExtResource("1_dnk72")
 
 [node name="AdditionalWater" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(0, 80)
-scale = Vector2(21.6, 5)
+position = Vector2(0, 140)
+scale = Vector2(21.6, 8.75)
 texture = ExtResource("2_pkgrh")
 
 [node name="BgImage" type="Sprite2D" parent="Parallax2D"]

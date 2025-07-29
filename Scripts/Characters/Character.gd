@@ -41,6 +41,10 @@ var _jump_velocity : float
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
+var _maximum : Vector2
+var _minimum : Vector2
+var _is_bound : bool
+
 
 func  _ready():
 	_speed *= Global.pixelpertile
@@ -49,6 +53,20 @@ func  _ready():
 	_jump_height *= Global.pixelpertile
 	_jump_velocity = sqrt(_jump_height * gravity * 2) * -1
 	face_left() if _is_facing_left else face_right()
+
+
+func set_bounds(_maximum_boundary : Vector2, _minimum_boundary : Vector2):
+	var sprite_size : Vector2 = _sprite.get_rect().size
+	_is_bound = true
+	_maximum = _maximum_boundary
+	_minimum = _minimum_boundary
+	
+	_minimum.x += sprite_size.x / 2
+	_maximum.x -= sprite_size.x / 2
+	
+	_minimum.y += sprite_size.y
+
+
 
 
 func face_left():
@@ -111,15 +129,22 @@ func _physics_process(delta: float):
 		face_right()
 	if _is_in_water:
 		_water_physics(delta)
-
 	elif is_on_floor():
 		_ground_physics(delta)
 	else:
 		_air_physics(delta)
 		_was_on_floor = is_on_floor()
+	
 	move_and_slide()
-	if not _was_on_floor && is_on_floor():
+
+	if not _was_on_floor and is_on_floor():
 		_landed()
+
+	if _is_bound:
+		position.x = clamp(position.x, _minimum.x, _maximum.x)
+		position.y = clamp(position.y, _minimum.y, _maximum.y)
+
+
 
 
 func _water_physics(delta : float):

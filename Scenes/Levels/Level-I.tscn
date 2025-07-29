@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://cvy6fvm0rka1j"]
+[gd_scene load_steps=21 format=3 uid="uid://cvy6fvm0rka1j"]
 
+[ext_resource type="Script" uid="uid://b0yp8ps83fdas" path="res://Scripts/Core/Level.gd" id="1_4tpuy"]
 [ext_resource type="Texture2D" uid="uid://cxubos1o3iqcp" path="res://Treasure Hunters/Palm Tree Island/Terrain/Terrain (32x32).png" id="1_af8cf"]
 [ext_resource type="Texture2D" uid="uid://pja7tjv1ut82" path="res://Treasure Hunters/Palm Tree Island/Front Palm Trees/Front Palm Bottom and Grass (32x32).png" id="2_4tpuy"]
 [ext_resource type="Script" uid="uid://ce3i5bmslsmrd" path="res://Scripts/Effects/Water.gd" id="3_elu0i"]
@@ -10,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://db6u0l2ua0ec" path="res://Treasure Hunters/Merchant Ship/Water/Water/Top/3.png" id="8_l7syk"]
 [ext_resource type="Texture2D" uid="uid://piaul5ruujo0" path="res://Treasure Hunters/Merchant Ship/Water/Water/Top/4.png" id="9_x2psm"]
 [ext_resource type="PackedScene" uid="uid://b5g6mdnmam7xm" path="res://Scenes/Decoration/PalmTree.tscn" id="10_f6bke"]
+[ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/SilverCoin.tscn" id="12_elu0i"]
+[ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/GoldCoin.tscn" id="13_6c84w"]
+[ext_resource type="PackedScene" uid="uid://d1b3lumhy27j8" path="res://Scenes/Treasures/GoldenSkull.tscn" id="14_qf5qf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af8cf"]
+size = Vector2(9000, 2300)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4v5pd"]
 texture = ExtResource("1_af8cf")
@@ -434,10 +441,13 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_tjx3w"]
 b = Vector2(8998, -16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_af8cf"]
-size = Vector2(9000, 2300)
-
 [node name="Level" type="Area2D"]
+script = ExtResource("1_4tpuy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3903, 86)
+shape = SubResource("RectangleShape2D_af8cf")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(3943, -225)
@@ -451,12 +461,14 @@ layer_1/z_index = 1
 [node name="Water" type="Area2D" parent="."]
 z_index = 10
 position = Vector2(993, 1080)
+collision_layer = 2
+collision_mask = 16843008
 script = ExtResource("3_elu0i")
 _splash = ExtResource("4_6c84w")
 
 [node name="Bottom" type="Sprite2D" parent="Water"]
-position = Vector2(3096, 56)
-scale = Vector2(100, 2)
+position = Vector2(2914.75, 92)
+scale = Vector2(96.0052, 4.24911)
 texture = ExtResource("5_qf5qf")
 
 [node name="Surface" type="Node2D" parent="Water"]
@@ -1147,9 +1159,18 @@ position = Vector2(0, 32)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3800, 0)
-shape = SubResource("RectangleShape2D_af8cf")
+[node name="Treasure" type="Node2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="SilverCoin" parent="Treasure" instance=ExtResource("12_elu0i")]
+position = Vector2(36, -22)
+freeze = false
+
+[node name="GoldCoin" parent="Treasure" instance=ExtResource("13_6c84w")]
+position = Vector2(84, -11)
+
+[node name="Golden Skull" parent="Treasure" instance=ExtResource("14_qf5qf")]
+position = Vector2(236, -4)
 
 [connection signal="body_entered" from="Water" to="Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Water" to="Water" method="_on_body_exited"]
