@@ -35,6 +35,15 @@ var _water_surface_height : float
 var _is_in_water : bool
 var _is_below_surface : bool
 
+@export_category("Health")
+
+@export_range(1, 100) 
+var _max_health : int = 5
+@onready var _current_health : int = _max_health
+@export var _is_hit : bool
+@onready var _hurt_box : Area2D = $HurtBox
+@onready var _invincible_time : Timer = $HurtBox/Invincible
+
 
 var _direction : float
 var _jump_velocity : float
@@ -55,6 +64,18 @@ func  _ready():
 	face_left() if _is_facing_left else face_right()
 
 
+func take_damage(amount : int):
+	_current_health -= amount
+	print(_current_health)
+	_is_hit = true
+	
+
+
+
+
+
+
+
 func set_bounds(_maximum_boundary : Vector2, _minimum_boundary : Vector2):
 	var sprite_size : Vector2 = _sprite.get_rect().size
 	_is_bound = true
@@ -65,7 +86,6 @@ func set_bounds(_maximum_boundary : Vector2, _minimum_boundary : Vector2):
 	_maximum.x -= sprite_size.x / 2
 	
 	_minimum.y += sprite_size.y
-
 
 
 

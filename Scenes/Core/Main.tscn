@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cs48dyw3fvxcm"]
+[gd_scene load_steps=22 format=3 uid="uid://cs48dyw3fvxcm"]
 
 [ext_resource type="PackedScene" uid="uid://dj2t3qeu8vp8i" path="res://Scenes/Characters/Roger.tscn" id="1_af3mk"]
 [ext_resource type="Script" uid="uid://bsfvteyjd7d5q" path="res://Scripts/Core/GameManager.gd" id="1_ah4vs"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://dyca63127xl6s" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/34.png" id="16_mjwtp"]
 [ext_resource type="Texture2D" uid="uid://t44sbcrc3ee2" path="res://Treasure Hunters/Wood and Paper UI/Small Text/Small Text/35.png" id="17_ij3x7"]
 [ext_resource type="Texture2D" uid="uid://dvrjnxbilunpx" path="res://Treasure Hunters/Pirate Treasure/Golden Skull/01.png" id="19_lijq2"]
+[ext_resource type="Texture2D" uid="uid://djgatdcxry4o0" path="res://Treasure Hunters/Merchant Ship/Chest Key/Idle/1.png" id="20_n62cl"]
+[ext_resource type="PackedScene" uid="uid://c51rn4rj4etxi" path="res://Scenes/Treasures/Fade.tscn" id="21_c1vld"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ah4vs")
@@ -105,6 +107,20 @@ layout_mode = 2
 texture = ExtResource("7_t7cte")
 expand_mode = 5
 stretch_mode = 5
+
+[node name="KeyIcon" type="TextureRect" parent="GameUI"]
+visible = false
+custom_minimum_size = Vector2(10, 10)
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 44.0
+offset_bottom = 124.0
+scale = Vector2(2, 2)
+texture = ExtResource("20_n62cl")
+
+[node name="Fade" parent="GameUI" instance=ExtResource("21_c1vld")]
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="changed_direction" from="Roger" to="Camera2D" method="_on_roger_changed_direction"]
 [connection signal="landed" from="Roger" to="Camera2D" method="_on_roger_landed"]

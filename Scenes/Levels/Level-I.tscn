@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cvy6fvm0rka1j"]
+[gd_scene load_steps=24 format=3 uid="uid://cvy6fvm0rka1j"]
 
 [ext_resource type="Script" uid="uid://b0yp8ps83fdas" path="res://Scripts/Core/Level.gd" id="1_4tpuy"]
 [ext_resource type="Texture2D" uid="uid://cxubos1o3iqcp" path="res://Treasure Hunters/Palm Tree Island/Terrain/Terrain (32x32).png" id="1_af8cf"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/SilverCoin.tscn" id="12_elu0i"]
 [ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/GoldCoin.tscn" id="13_6c84w"]
 [ext_resource type="PackedScene" uid="uid://d1b3lumhy27j8" path="res://Scenes/Treasures/GoldenSkull.tscn" id="14_qf5qf"]
+[ext_resource type="PackedScene" uid="uid://r1euelbtusl" path="res://Scenes/Treasures/Chest.tscn" id="15_uoe8b"]
+[ext_resource type="PackedScene" uid="uid://bo7y2cn0n2e8i" path="res://Scenes/Treasures/Spikes.tscn" id="16_ok31i"]
+[ext_resource type="Script" uid="uid://c54jb7m1buic5" path="res://Scripts/Core/Hazzard.gd" id="17_l7syk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af8cf"]
 size = Vector2(9000, 2300)
@@ -1171,6 +1174,14 @@ position = Vector2(84, -11)
 
 [node name="Golden Skull" parent="Treasure" instance=ExtResource("14_qf5qf")]
 position = Vector2(236, -4)
+
+[node name="Chest" parent="Treasure" instance=ExtResource("15_uoe8b")]
+position = Vector2(159, -2)
+_total_value = 12
+
+[node name="Spike" parent="." instance=ExtResource("16_ok31i")]
+position = Vector2(0, -16)
+script = ExtResource("17_l7syk")
 
 [connection signal="body_entered" from="Water" to="Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Water" to="Water" method="_on_body_exited"]
