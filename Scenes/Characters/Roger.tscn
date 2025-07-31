@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dj2t3qeu8vp8i"]
+[gd_scene load_steps=60 format=3 uid="uid://dj2t3qeu8vp8i"]
 
 [ext_resource type="Script" uid="uid://dndqvloy7t205" path="res://Scripts/Characters/Character.gd" id="1_mseo1"]
 [ext_resource type="Texture2D" uid="uid://d22rxf8wclrx3" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/01-Idle/Idle 01.png" id="2_g7xoc"]
@@ -21,6 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://d2pr3eq15e3ev" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/05-Ground/Ground 02.png" id="18_mf7a3"]
 [ext_resource type="PackedScene" uid="uid://b0pou66sk3wsh" path="res://Scenes/Effects/Fall Dust Particles.tscn" id="19_mf7a3"]
 [ext_resource type="PackedScene" uid="uid://gfd8r1423yp" path="res://Scenes/Effects/Run Dust Particles.tscn" id="21_najpk"]
+[ext_resource type="Texture2D" uid="uid://402r1sg6gen4" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/06-Hit/Hit 01.png" id="22_pamlj"]
+[ext_resource type="Texture2D" uid="uid://1v5v3sivt1l2" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/06-Hit/Hit 02.png" id="23_3yl7y"]
+[ext_resource type="Texture2D" uid="uid://60p2g6sen63p" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/06-Hit/Hit 03.png" id="24_qfmvc"]
+[ext_resource type="Texture2D" uid="uid://bunca6ababgtr" path="res://Treasure Hunters/Captain Clown Nose/Captain Clown Nose/Captain Clown Nose without Sword/06-Hit/Hit 04.png" id="25_lqv8q"]
 
 [sub_resource type="Animation" id="Animation_0noth"]
 resource_name = "Fall"
@@ -149,6 +153,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_g7xoc")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:_is_hit")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_gyjaf"]
 resource_name = "Run"
@@ -197,10 +213,55 @@ tracks/2/keys = {
 }
 tracks/2/use_blend = true
 
+[sub_resource type="Animation" id="Animation_ae0cd"]
+resource_name = "Hit"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("22_pamlj"), ExtResource("23_3yl7y"), ExtResource("24_qfmvc"), ExtResource("25_lqv8q")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:_is_hit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g7xoc"]
 _data = {
 &"Fall": SubResource("Animation_0noth"),
 &"Ground": SubResource("Animation_ceehr"),
+&"Hit": SubResource("Animation_ae0cd"),
 &"Idle": SubResource("Animation_mseo1"),
 &"Jump": SubResource("Animation_mf7a3"),
 &"RESET": SubResource("Animation_gb7e1"),
@@ -208,6 +269,9 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mf7a3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pamlj"]
+animation = &"Hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gyjaf"]
 animation = &"Fall"
@@ -281,12 +345,22 @@ transitions = ["Start", "Locomotion", SubResource("AnimationNodeStateMachineTran
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h368p"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kilcf"]
+advance_mode = 2
+advance_expression = "_is_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f54c0"]
+advance_mode = 2
+advance_expression = "not _is_hit"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f54c0"]
 states/End/position = Vector2(714, 174)
+states/Hit/node = SubResource("AnimationNodeAnimation_pamlj")
+states/Hit/position = Vector2(407, 52)
 states/Movement/node = SubResource("AnimationNodeStateMachine_kilcf")
 states/Movement/position = Vector2(407, 174)
 states/Start/position = Vector2(183, 174)
-transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_h368p")]
+transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_h368p"), "Movement", "Hit", SubResource("AnimationNodeStateMachineTransition_kilcf"), "Hit", "Movement", SubResource("AnimationNodeStateMachineTransition_f54c0")]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e0k5m"]
 advance_mode = 2
@@ -303,10 +377,14 @@ transitions = ["Start", "Without Sword", SubResource("AnimationNodeStateMachineT
 radius = 9.0
 height = 28.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_najpk"]
+radius = 9.0
+height = 28.0
+
 [node name="Roger" type="CharacterBody2D"]
 position = Vector2(0, -12)
 collision_layer = 256
-collision_mask = 65537
+collision_mask = 65539
 script = ExtResource("1_mseo1")
 _jump_dust = ExtResource("2_mf7a3")
 _is_facing_left = true
@@ -331,3 +409,16 @@ position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_3eeal")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_najpk")
+debug_color = Color(0.484208, 0.0983573, 0.0215744, 0.42)
+
+[node name="Invincible" type="Timer" parent="HurtBox"]
+one_shot = true
