@@ -55,7 +55,7 @@ Slash={
 
 2d_physics/layer_1="Terrain"
 2d_physics/layer_2="Water"
-2d_physics/layer_3="Hazzards"
+2d_physics/layer_3="Hazards"
 2d_physics/layer_9="Player"
 2d_physics/layer_10="Player HurtBox"
 2d_physics/layer_17="Enemy"

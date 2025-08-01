@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cvy6fvm0rka1j"]
+[gd_scene load_steps=26 format=3 uid="uid://cvy6fvm0rka1j"]
 
 [ext_resource type="Script" uid="uid://b0yp8ps83fdas" path="res://Scripts/Core/Level.gd" id="1_4tpuy"]
 [ext_resource type="Texture2D" uid="uid://cxubos1o3iqcp" path="res://Treasure Hunters/Palm Tree Island/Terrain/Terrain (32x32).png" id="1_af8cf"]
@@ -10,13 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://u0j26p1cevdw" path="res://Treasure Hunters/Merchant Ship/Water/Water/Top/2.png" id="7_ok31i"]
 [ext_resource type="Texture2D" uid="uid://db6u0l2ua0ec" path="res://Treasure Hunters/Merchant Ship/Water/Water/Top/3.png" id="8_l7syk"]
 [ext_resource type="Texture2D" uid="uid://piaul5ruujo0" path="res://Treasure Hunters/Merchant Ship/Water/Water/Top/4.png" id="9_x2psm"]
-[ext_resource type="PackedScene" uid="uid://b5g6mdnmam7xm" path="res://Scenes/Decoration/PalmTree.tscn" id="10_f6bke"]
-[ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/SilverCoin.tscn" id="12_elu0i"]
-[ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/GoldCoin.tscn" id="13_6c84w"]
-[ext_resource type="PackedScene" uid="uid://d1b3lumhy27j8" path="res://Scenes/Treasures/GoldenSkull.tscn" id="14_qf5qf"]
+[ext_resource type="PackedScene" uid="uid://b5g6mdnmam7xm" path="res://Scenes/Decoration/Palm Tree.tscn" id="10_f6bke"]
+[ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/Silver Coin.tscn" id="12_elu0i"]
+[ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/Gold Coin.tscn" id="13_6c84w"]
+[ext_resource type="PackedScene" uid="uid://d1b3lumhy27j8" path="res://Scenes/Treasures/Golden Skull.tscn" id="14_qf5qf"]
 [ext_resource type="PackedScene" uid="uid://r1euelbtusl" path="res://Scenes/Treasures/Chest.tscn" id="15_uoe8b"]
 [ext_resource type="PackedScene" uid="uid://bo7y2cn0n2e8i" path="res://Scenes/Treasures/Spikes.tscn" id="16_ok31i"]
-[ext_resource type="Script" uid="uid://c54jb7m1buic5" path="res://Scripts/Core/Hazzard.gd" id="17_l7syk"]
+[ext_resource type="PackedScene" uid="uid://boeekiamemcb5" path="res://Scenes/Treasures/Red Potion.tscn" id="17_p37n2"]
+[ext_resource type="PackedScene" uid="uid://dsrbxbluaqv7n" path="res://Scenes/Treasures/Small Map II.tscn" id="18_qnajj"]
+[ext_resource type="PackedScene" uid="uid://bcpvwryd5mx7r" path="res://Scenes/Levels/CheckPoint.tscn" id="18_tvan6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af8cf"]
 size = Vector2(9000, 2300)
@@ -444,7 +446,7 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_tjx3w"]
 b = Vector2(8998, -16)
 
-[node name="Level" type="Area2D"]
+[node name="Level I" type="Area2D"]
 script = ExtResource("1_4tpuy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1180,8 +1182,21 @@ position = Vector2(159, -2)
 _total_value = 12
 
 [node name="Spike" parent="." instance=ExtResource("16_ok31i")]
-position = Vector2(0, -16)
-script = ExtResource("17_l7syk")
+position = Vector2(110, -15)
+
+[node name="Red Potion" parent="." instance=ExtResource("17_p37n2")]
+position = Vector2(319, -26)
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Start" type="Node2D" parent="Checkpoints"]
+position = Vector2(1026, -59)
+
+[node name="Middle" parent="Checkpoints" instance=ExtResource("18_tvan6")]
+position = Vector2(627, 0)
+
+[node name="End" parent="Checkpoints" instance=ExtResource("18_qnajj")]
+position = Vector2(867, -40)
 
 [connection signal="body_entered" from="Water" to="Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Water" to="Water" method="_on_body_exited"]

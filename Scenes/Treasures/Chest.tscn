@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://beaj4syx51irx" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/3.png" id="1_4ww4f"]
 [ext_resource type="Script" uid="uid://v8puyi7vjn33" path="res://Scripts/Treasures/Chest.gd" id="1_fhhbr"]
-[ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/SilverCoin.tscn" id="2_f7bfp"]
-[ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/GoldCoin.tscn" id="3_6y6uy"]
+[ext_resource type="PackedScene" uid="uid://qp3mu42ii322" path="res://Scenes/Treasures/Silver Coin.tscn" id="2_f7bfp"]
+[ext_resource type="PackedScene" uid="uid://bm7odin5iey8n" path="res://Scenes/Treasures/Gold Coin.tscn" id="3_6y6uy"]
 [ext_resource type="Texture2D" uid="uid://cooe0urcawicl" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/7.png" id="3_g4lpq"]
-[ext_resource type="PackedScene" uid="uid://pv7lwflmxjmr" path="res://Scenes/Treasures/PadLock.tscn" id="3_i13va"]
+[ext_resource type="PackedScene" uid="uid://pv7lwflmxjmr" path="res://Scenes/Treasures/Pad Lock.tscn" id="3_i13va"]
 [ext_resource type="Texture2D" uid="uid://cjdfumyb4bh8n" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/6.png" id="4_jpaba"]
 [ext_resource type="Texture2D" uid="uid://cc70npb36gkcm" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/5.png" id="5_xjnmp"]
 [ext_resource type="Texture2D" uid="uid://bqfhby6f4se50" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/4.png" id="6_f7bfp"]
@@ -13,21 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dy5nod57tvafo" path="res://Treasure Hunters/Merchant Ship/Chest/Idle/1.png" id="10_6y6uy"]
 [ext_resource type="Texture2D" uid="uid://be5ixqh0bk42e" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/2.png" id="11_avmrj"]
 [ext_resource type="Texture2D" uid="uid://860omf7nlbnn" path="res://Treasure Hunters/Merchant Ship/Chest/Unlocked/1.png" id="12_i13va"]
-
-[sub_resource type="Animation" id="Animation_e211s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_4ww4f")]
-}
 
 [sub_resource type="Animation" id="Animation_6y6uy"]
 resource_name = "Close"
@@ -45,8 +30,8 @@ tracks/0/keys = {
 "values": [ExtResource("1_4ww4f"), ExtResource("3_g4lpq"), ExtResource("4_jpaba"), ExtResource("5_xjnmp"), ExtResource("6_f7bfp")]
 }
 
-[sub_resource type="Animation" id="Animation_3fgly"]
-resource_name = "Open_Idle"
+[sub_resource type="Animation" id="Animation_fhhbr"]
+resource_name = "Close_Idle"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -58,7 +43,39 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_jpaba")]
+"values": [ExtResource("1_4ww4f")]
+}
+
+[sub_resource type="Animation" id="Animation_rj40p"]
+resource_name = "Lock"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_4ww4f"), ExtResource("11_avmrj"), ExtResource("12_i13va")]
+}
+
+[sub_resource type="Animation" id="Animation_c5bhi"]
+resource_name = "Locked_Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_6y6uy")]
 }
 
 [sub_resource type="Animation" id="Animation_xjnmp"]
@@ -91,9 +108,24 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_fhhbr"]
-resource_name = "Close_Idle"
+[sub_resource type="Animation" id="Animation_3fgly"]
+resource_name = "Open_Idle"
 length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_jpaba")]
+}
+
+[sub_resource type="Animation" id="Animation_e211s"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -105,38 +137,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("1_4ww4f")]
-}
-
-[sub_resource type="Animation" id="Animation_c5bhi"]
-resource_name = "Locked_Idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("10_6y6uy")]
-}
-
-[sub_resource type="Animation" id="Animation_rj40p"]
-resource_name = "Lock"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("1_4ww4f"), ExtResource("11_avmrj"), ExtResource("12_i13va")]
 }
 
 [sub_resource type="Animation" id="Animation_avmrj"]

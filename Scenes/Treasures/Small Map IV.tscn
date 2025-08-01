@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://cfvucs43hgqg3"]
 
-[ext_resource type="Script" uid="uid://s0h6v7iufuh4" path="res://Scripts/Treasures/SmallMap.gd" id="1_q71eo"]
+[ext_resource type="Script" uid="uid://s0h6v7iufuh4" path="res://Scripts/Health/Small Map.gd" id="1_q71eo"]
 [ext_resource type="Texture2D" uid="uid://b8lkpxqilrqfl" path="res://Treasure Hunters/Pirate Treasure/Map Effect/In/01.png" id="2_belmi"]
 [ext_resource type="Texture2D" uid="uid://bharckyiuigxb" path="res://Treasure Hunters/Pirate Treasure/Map Effect/In/02.png" id="3_6ea5n"]
 [ext_resource type="Texture2D" uid="uid://clab80rk6qi6c" path="res://Treasure Hunters/Pirate Treasure/Map Effect/In/03.png" id="4_4j0q8"]
