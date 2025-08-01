@@ -1190,7 +1190,7 @@ position = Vector2(319, -26)
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Start" type="Node2D" parent="Checkpoints"]
-position = Vector2(1026, -59)
+position = Vector2(-61, -73)
 
 [node name="Middle" parent="Checkpoints" instance=ExtResource("18_tvan6")]
 position = Vector2(627, 0)
